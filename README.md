@@ -35,6 +35,6 @@ For an in-depth technical breakdown, architectural overviews and detailed explan
 👉 [Read the Full Project Report (Google Docs)](https://docs.google.com/document/d/1VYUU8XZ0R326FmLdFww7yr4So18_P6aPLo_TzmZgN4w/edit?tab=t.0#heading=h.wml1h12dox33)
 
 ## 🔮 Future Roadmap
-MaxiPacker is an ongoing research project designed to test and understand defensive boundaries. As I continuously experiment with new bypasses, the source code may evolve dynamically.
+MaxiPacker is an ongoing research project designed to test and understand defensive boundaries. As I continuously experiment with new bypasses, the code may evolve dynamically.
 
 **Next Milestone:** Implement remote payload staging. Staging the encrypted payload over the network (rather than embedding it within the loader) will further lower file entropy and eliminate the probability of static on-disk detection prior to execution.
