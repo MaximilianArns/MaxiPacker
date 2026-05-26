@@ -5,7 +5,7 @@ This repository is based on the *Packer Development Workshop* authored by [S3cur
 
 The main implementations I added were Hardware Breakbpoints, Module Stompinga and API Hashing. Although I have also added on techniques that already existed in the source code, for example I extended the number of syscalls that could be indirectly called without going the usually windows API path.
 
-My primary contributions and custom implementations include **Hardware Breakpoints**, **Module Stomping**, and **API Hashing**. Additionally, I expanded upon the existing techniques in the source code, for instance, by extending the number of native syscalls that can be invoked indirectly, completely bypassing the standard Windows API execution path.
+My primary contributions and custom implementations include **Hardware Breakpoints**, **Module Stomping**, and **API Hashing**. Additionally, I expanded upon the existing techniques in the source code, for instance by extending the number of native syscalls that can be invoked indirectly, completely bypassing the standard Windows API execution path.
 
 ---
 
@@ -29,7 +29,7 @@ To eliminate static string signatures of Windows APIs and DLL names within the b
 ---
 
 ## 🎓 Academic Background & Documentation
-This project served as my final graduation project for the Penetration tester program at **IT-Högskolan**.
+This project served as my final graduation project for the Penetration Tester program at **IT-Högskolan**.
 
 For an in-depth technical breakdown, architectural overviews and detailed explanations of my contributions, please refer to the full project documentation:
 👉 [Read the Full Project Report (Google Docs)](https://docs.google.com/document/d/1VYUU8XZ0R326FmLdFww7yr4So18_P6aPLo_TzmZgN4w/edit?tab=t.0#heading=h.wml1h12dox33)
