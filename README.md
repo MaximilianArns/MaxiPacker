@@ -9,7 +9,7 @@ My primary contributions and custom implementations include **Hardware Breakpoin
 
 ---
 
-## 🛠️ Key Implementations & Evasion Techniques
+## Key Implementations & Evasion Techniques
 
 ### 1. Hardware Breakpoints
 Instead of modifying security-critical functions like `AmsiScanBuffer()` through traditional memory patching (which is highly visible to modern EDRs), MaxiPacker leverages the CPU's debug registers (`DR0`-`DR7`). By setting Hardware Breakpoints at the target function addresses, we can intercept the execution flow and manipulate the CPU state to spoof a "clean" scan result. This technique completely avoids modifying the function's bytes on disk or in memory, leaving a minimal footprint.
@@ -28,13 +28,13 @@ To eliminate static string signatures of Windows APIs and DLL names within the b
 
 ---
 
-## 🎓 Academic Background & Documentation
+## Academic Background & Documentation
 This project served as my final graduation project for the Penetration Tester program at **IT-Högskolan**.
 
 For an in-depth technical breakdown, architectural overviews and detailed explanations of my contributions, please refer to the full project documentation:
 👉 [Read the Full Project Report (Google Docs)](https://docs.google.com/document/d/1VYUU8XZ0R326FmLdFww7yr4So18_P6aPLo_TzmZgN4w/edit?tab=t.0#heading=h.wml1h12dox33)
 
-## 🔮 Future Roadmap
+## Future Roadmap
 MaxiPacker is an ongoing research project designed to test and understand defensive boundaries. As I continuously experiment with new bypasses, the code may evolve dynamically.
 
 **Next Milestone:** Implement remote payload staging. Staging the encrypted payload over the network (rather than embedding it within the loader) will further lower file entropy and eliminate the probability of static on-disk detection prior to execution.
