@@ -12,13 +12,13 @@ My primary contributions and custom implementations include **Hardware Breakpoin
 ## Key Implementations & Evasion Techniques
 
 ### 1. Hardware Breakpoints
-Instead of modifying security-critical functions like `AmsiScanBuffer()` through traditional memory patching (which is highly visible to modern EDRs), MaxiPacker leverages the CPU's debug registers (`DR0`-`DR7`). By setting Hardware Breakpoints at the target function addresses, we can intercept the execution flow and manipulate the CPU state to spoof a "clean" scan result. This technique completely avoids modifying the function's bytes on disk or in memory, leaving a minimal footprint.
+Instead of modifying security-critical functions like `AmsiScanBuffer()` through traditional memory patching (which is highly visible to modern EDRs), MaxiPacker leverages the CPU's debug registers (`DR0`-`DR7`). By setting Hardware Breakpoints at the target function addresses, we can intercept the execution flow and manipulate the CPU state to spoof a "clean" scan result. This technique completely avoids modifying the function's bytes on disk or in memory, leaving a minimal footprint. Checkout the `src/evasion/hwbp_amsi_etw.h` file.
 
 **PoC:** `AmsiScanBuffer` targeted via `DR0` with `DR7` activation:
 <img width="1711" height="911" alt="amsidllhwbpPoC" src="https://github.com/user-attachments/assets/89bb8e58-f571-45be-88ec-3664e46fffaa" />
 
 ### 2. Module Stomping
-To avoid the indicators of compromise (IoCs) associated with allocating fresh, untrusted memory pages for a payload, MaxiPacker implements Module Stomping. This technique loads a legitimate, digitally signed Windows DLL (such as `xpsprint.dll`) into the process memory and overwrites its legitimate code section with our payload. Because security products expect executable code to run from these verified modules, the payload blends seamlessly into normal process behavior.
+To avoid the indicators of compromise (IoCs) associated with allocating fresh, untrusted memory pages for a payload, MaxiPacker implements Module Stomping. This technique loads a legitimate, digitally signed Windows DLL (such as `xpsprint.dll`) into the process memory and overwrites its legitimate code section with our payload. Because security products expect executable code to run from these verified modules, the payload blends seamlessly into normal process behavior. Checkout the `src/auxiliary/stomping.h` file.
 
 **PoC:** Executing a custom `calc.exe` payload generated via `msfvenom`:
 <img width="1708" height="913" alt="DLL_StompingPoC" src="https://github.com/user-attachments/assets/793f77f6-b5d3-4d00-981b-461a1dcf9d37" />
@@ -35,6 +35,6 @@ For an in-depth technical breakdown, architectural overviews and detailed explan
 👉 [Read the Full Project Report (Google Docs)](https://docs.google.com/document/d/1VYUU8XZ0R326FmLdFww7yr4So18_P6aPLo_TzmZgN4w/edit?tab=t.0#heading=h.wml1h12dox33)
 
 ## Future Roadmap
-MaxiPacker is an ongoing research project designed to test and understand defensive boundaries. As I continuously experiment with new bypasses, the code may evolve dynamically.
+MaxiPacker is an ongoing research project designed to test and understand defensive boundaries. As I continuously experiment with new bypasses, the code may evolve dynamically and may not always look complete.
 
 **Next Milestone:** Implement remote payload staging. Staging the encrypted payload over the network (rather than embedding it within the loader) will further lower file entropy and eliminate the probability of static on-disk detection prior to execution.
