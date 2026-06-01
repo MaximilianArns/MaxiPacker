@@ -3,8 +3,6 @@
 
 This repository is based on the *Packer Development Workshop* authored by [S3cur3Th1sSh1t](https://github.com/S3cur3Th1sSh1t) and [eversinc33](https://github.com/eversinc33) ([rtecCyberSec/Packer_Development](https://github.com/rtecCyberSec/Packer_Development/tree/master)). Using the C-logic from that framework as a foundation, I followed their roadmap and implemented custom features to create my own specialized version: **MaxiPacker**.
 
-The main implementations I added were Hardware Breakbpoints, Module Stompinga and API Hashing. Although I have also added on techniques that already existed in the source code, for example I extended the number of syscalls that could be indirectly called without going the usually windows API path.
-
 My primary contributions and custom implementations include **Hardware Breakpoints**, **Module Stomping**, and **API Hashing**. Additionally, I expanded upon the existing techniques in the source code, for instance by extending the number of native syscalls that can be invoked indirectly, completely bypassing the standard Windows API execution path.
 
 ---
@@ -18,7 +16,7 @@ Instead of modifying security-critical functions like `AmsiScanBuffer()` through
 <img width="1711" height="911" alt="amsidllhwbpPoC" src="https://github.com/user-attachments/assets/89bb8e58-f571-45be-88ec-3664e46fffaa" />
 
 ### 2. Module Stomping
-To avoid the indicators of compromise (IoCs) associated with allocating fresh, untrusted memory pages for a payload, MaxiPacker implements Module Stomping. This technique loads a legitimate, digitally signed Windows DLL (such as `xpsprint.dll`) into the process memory and overwrites its legitimate code section with our payload. Because security products expect executable code to run from these verified modules, the payload blends seamlessly into normal process behavior. Check out the `src/auxiliary/stomping.h` file.
+To avoid behavioral indicators associated with allocating fresh, untrusted memory pages for a payload, MaxiPacker implements Module Stomping. This technique loads a legitimate, digitally signed Windows DLL (such as `xpsprint.dll`) into the process memory and overwrites its legitimate code section with our payload. Because security products expect executable code to run from these verified modules, the payload blends seamlessly into normal process behavior. Check out the `src/auxiliary/stomping.h` file.
 
 **PoC:** Executing a custom `calc.exe` payload generated via `msfvenom`:
 <img width="1708" height="913" alt="DLL_StompingPoC" src="https://github.com/user-attachments/assets/793f77f6-b5d3-4d00-981b-461a1dcf9d37" />
