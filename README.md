@@ -22,7 +22,7 @@ To avoid behavioral indicators associated with allocating fresh, untrusted memor
 <img width="1708" height="913" alt="DLL_StompingPoC" src="https://github.com/user-attachments/assets/793f77f6-b5d3-4d00-981b-461a1dcf9d37" />
 
 ### 3. API Hashing
-To eliminate static string signatures of Windows APIs and DLL names within the binary, I implemented a custom API Hashing mechanism utilizing a unique salt. This required rewriting the memory lookup logic to dynamically resolve exports by comparing hashes rather than plaintext strings, significantly lowering the loader's static detection rate. Check out the new memory lookup logic here `src/auxiliary/helpers.h`
+To eliminate static string signatures of Windows APIs and DLL names within the binary, I implemented a custom API Hashing mechanism utilizing a unique salt. This required rewriting the memory lookup logic to dynamically resolve exports by comparing hashes rather than plaintext strings, significantly lowering the loader's static detection rate. Check out the new memory lookup logic here `src/auxiliary/helpers.h`.
 
 ---
 
